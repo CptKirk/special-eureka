@@ -24,3 +24,10 @@ spec:
         name: valkey
         namespace: flux-system
       interval: 1h
+  values:
+    resources:
+      limits:
+        memory: 128Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
