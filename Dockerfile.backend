@@ -1,0 +1,32 @@
+FROM nodejs:22 AS builder
+
+WORKDIR /builder
+
+ADD package.json package-lock.json /builder/
+
+RUN npm i
+
+FROM alpine
+
+WORKDIR /app
+
+# Install required binaries and create a non-root user
+RUN apk add --no-cache libstdc++ dumb-init \
+  && addgroup -g 1000 node \
+  && adduser -u 1000 -G node -s /bin/sh -D node \
+  && chown node:node ./
+
+# Copy node and entrypoint script from the builder stage
+COPY --from=builder /usr/local/bin/node /usr/local/bin/
+COPY --from=builder /usr/local/bin/docker-entrypoint.sh /usr/local/bin/
+
+ENTRYPOINT ["docker-entrypoint.sh"]
+
+USER node
+
+# Copy node_modules and dist folder from the builder stage
+COPY --from=builder /builder/node_modules ./node_modules
+
+ADD index.js ./
+
+CMD ["dumb-init", "node", "/app/index.js"]
