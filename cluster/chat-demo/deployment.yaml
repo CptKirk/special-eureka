@@ -15,16 +15,16 @@ spec:
       labels:
         app: backend
     spec:
-      env:
-      - name: PORT
-        value: '3000'
-      - name: REDIS_URL
-        value: 'redis://chat-demo-valkey:6379'
       containers:
       - name: backend
         image: ghcr.io/cptkirk/special-eureka:backend-0.0.1
         ports:
         - containerPort: 3000
+        env:
+        - name: PORT
+          value: '3000'
+        - name: REDIS_URL
+          value: 'redis://chat-demo-valkey:6379'
 ---
 apiVersion: apps/v1
 kind: Deployment
