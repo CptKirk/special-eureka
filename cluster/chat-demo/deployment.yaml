@@ -45,6 +45,6 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: ghcr.io/cptkirk/special-eureka:frontend-0.0.1
+        image: ghcr.io/cptkirk/special-eureka:frontend-0.0.2
         ports:
         - containerPort: 80
