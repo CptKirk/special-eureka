@@ -4,13 +4,13 @@ kind: Ingress
 metadata:
   name: chat-demo-ingress
   namespace: chat-demo
-  # annotations:
-  #   cert-manager.io/cluster-issuer: chat-demo-issuer
+  annotations:
+    cert-manager.io/issuer: chat-demo-issuer
 spec:
-  # tls:
-  # - hosts:
-  #     - kfuks.devel.techcast.com
-  #   secretName: chat-demo-ingress-cert
+  tls:
+  - hosts:
+      - kfuks.chat-demo.devel.techcast.cloud
+    secretName: chat-demo-ingress-cert
   rules:
   - host: kfuks.chat-demo.devel.techcast.cloud
     http:
