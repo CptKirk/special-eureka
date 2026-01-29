@@ -1,0 +1,32 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: chat-demo-ingress
+  namespace: chat-demo
+  # annotations:
+  #   cert-manager.io/cluster-issuer: chat-demo-issuer
+spec:
+  # tls:
+  # - hosts:
+  #     - kfuks.devel.techcast.com
+  #   secretName: chat-demo-ingress-cert
+  rules:
+  - host: kfuks.chat-demo.devel.techcast.cloud
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend
+            port:
+              name: http
+      - path: /rta
+        pathType: Prefix
+        backend:
+          service:
+            name: backend
+            port:
+              name: http
+        
