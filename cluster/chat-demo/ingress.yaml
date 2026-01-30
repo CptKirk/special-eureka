@@ -23,10 +23,10 @@ metadata:
 spec:
   tls:
   - hosts:
-      - kfuks.chat-demo.devel.techcast.cloud
+      - reference.chat-demo.devel.techcast.cloud
     secretName: chat-demo-ingress-cert
   rules:
-  - host: kfuks.chat-demo.devel.techcast.cloud
+  - host: reference.chat-demo.devel.techcast.cloud
     http:
       paths:
       - path: /
